@@ -1,43 +1,43 @@
 **RC522 RFID Card Reader with STM32F103**
 
-An RFID card reader built on an STM32F103C8T6 (Blue Pill) and an MFRC522 (RC522) module. The RC522 driver is written from scratch in Embedded C using the STM32 HAL library, with direct register read/write over SPI. No ready-made RC522 library is used.
+An RFID card reader built on an STM32F103C8T6 (Blue Pill) and an MFRC522 (RC522) module. The RC522 driver is written from scratch in Embedded C using the STM32 HAL library, with direct register read/write over SPI.
 
 When a card is tapped, the firmware reads its UID and prints it on a serial terminal. Registered cards are greeted by name. Unknown cards can be registered by typing a name over UART.
 
-Features
-RC522 communication over SPI2 with register-level read/write functions
-ISO 14443A card detection: REQA, anti-collision and select
-Handles both 4-byte and 7-byte UIDs (cascade levels 1 and 2)
-Prints the card UID over UART (USART1)
-Matches the UID against a list of registered users and shows Welcome, <name>
-For unknown cards, asks for a name over UART (10 second timeout) and adds the user
-Prints the date and time on a card tap using the STM32 internal RTC
-Hardware
-Part	Details
-Microcontroller	STM32F103C8T6 (ARM Cortex-M3, "Blue Pill")
-RFID reader	MFRC522 (RC522) module, 13.56 MHz
-Cards	MIFARE-type tags/cards
-Serial terminal	USB-to-serial adapter (or ST-Link virtual COM port)
-Wiring
+Features : 
+- RC522 communication over SPI2 with register-level read/write functions
+- ISO 14443A card detection: REQA, anti-collision and select
+- Handles both 4-byte and 7-byte UIDs (cascade levels 1 and 2)
+- Prints the card UID over UART (USART1)
+- Matches the UID against a list of registered users and shows Welcome, <name>
+- For unknown cards, asks for a name over UART (10 second timeout) and adds the user
+- Prints the date and time on a card tap using the STM32 internal RTC
+
+Hardware :
+- Microcontroller	STM32F103C8T6 (ARM Cortex-M3, "Blue Pill")
+- RFID reader	MFRC522 (RC522) module, 13.56 MHz
+- Cards	MIFARE-type tags/cards
+- Serial terminal USB-to-TTL
+
+Wiring :
 
 The RC522 runs at 3.3 V. Do not connect it to 5 V.
 
 RC522 pin	STM32F103 pin
-SDA (SS / CS)	GPIO output of your choice (chip select)
-SCK	PB13 (SPI2_SCK)
-MOSI	PB15 (SPI2_MOSI)
-MISO	PB14 (SPI2_MISO)
-RST	GPIO output of your choice (optional hard reset)
-3.3V	3.3V
-GND	GND
+SDA         (SS / CS)	GPIO output of your choice (chip select)
+SCK	      PB13 (SPI2_SCK)
+MOSI	      PB15 (SPI2_MOSI)
+MISO	      PB14 (SPI2_MISO)
+RST	      GPIO output of your choice (optional hard reset)
+3.3V	      3.3 V
+GND	      GND
 
-Update the SDA and RST rows to match the pins configured in your .ioc file.
 
-Software and tools
-Embedded C
-STM32CubeIDE and STM32CubeMX
-STM32 HAL library
-Any serial terminal (PuTTY, Tera Term, etc.)
+Software and tools :
+- Embedded C
+- STM32CubeIDE and STM32CubeMX
+- Serial terminal (PuTTY, Tera Term, etc.). I used puTTY
+
 Build and run
 Clone this repository:
 bash
@@ -68,6 +68,6 @@ Keep time across power loss with a DS3231 or a VBAT battery
 Log taps with timestamps
 Add an LCD display and a relay/buzzer for door-lock style use
 Read and write MIFARE data blocks with authentication
-Author
 
-Prashant Shivpuje B.Tech, Electrical Engineering, 2026 Interested in embedded firmware and IoT development.
+Author :
+Prashant Shivpuje
